@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flavor - Free Restaurant Template</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: #444;
+            background: #fff
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Playfair Display', serif;
+            color: #000
+        }
+
+        span {
+            color: #c8a97e
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 7%;
+            background: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            color: #fff;
+            transition: 0.3s
+        }
+
+        .navbar.scrolled {
+            background: #000
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700
+        }
+
+        .logo span {
+            color: #c8a97e
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none
+        }
+
+        .nav-links li {
+            cursor: pointer;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px
+        }
+
+        .nav-links li.active {
+            color: #c8a97e
+        }
+
+        .btn-reserve {
+            border: 1px solid #c8a97e;
+            background: transparent;
+            color: #c8a97e;
+            padding: 8px 18px;
+            border-radius: 3px;
+            cursor: pointer
+        }
+
+        .hamburger {
+            display: none
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://preview.colorlib.com/theme/flavor/images/bg_1.jpg.webp') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff
+        }
+
+        .hero h1 {
+            font-size: 70px;
+            color: #fff;
+            line-height: 80px;
+            margin: 15px 0
+        }
+
+        .sub {
+            letter-spacing: 5px;
+            font-size: 13px;
+            color: #c8a97e
+        }
+
+        .btn-primary {
+            background: #c8a97e;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            cursor: pointer
+        }
+
+        .btn-white {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            margin-left: 10px;
+            cursor: pointer
+        }
+
+        .hero-btns {
+            margin-top: 20px
+        }
+
+        /* About */
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            padding: 100px 7%
+        }
+
+        .about-img img {
+            width: 100%
+        }
+
+        .about-text h2 {
+            font-size: 40px;
+            margin: 10px 0
+        }
+
+        .about-text p {
+            color: #666;
+            margin-bottom: 15px
+        }
+
+        .signature {
+            margin-top: 20px
+        }
+
+        /* Counter */
+        .counter {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            padding: 60px 7%;
+            background: #c8a97e;
+            color: #fff;
+            text-align: center
+        }
+
+        .counter h3 {
+            font-size: 40px;
+            color: #fff
+        }
+
+        .counter p {
+            font-size: 14px;
+            color: #fff
+        }
+
+        /* Services */
+        .services {
+            text-align: center;
+            padding: 100px 7%;
+            background: #fafafa
+        }
+
+        .services h2 {
+            font-size: 44px;
+            margin-bottom: 50px
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px
+        }
+
+        .s-box i {
+            font-size: 50px;
+            color: #c8a97e;
+            margin-bottom: 15px
+        }
+
+        .s-box h4 {
+            margin-bottom: 10px
+        }
+
+        /* Menu */
+        .menu {
+            text-align: center;
+            padding: 100px 7%
+        }
+
+        .menu h2 {
+            font-size: 44px;
+            margin-bottom: 50px
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            text-align: left
+        }
+
+        .menu-item {
+            display: flex;
+            gap: 20px;
+            background: #fff;
+            border: 1px solid #f0f0f0;
+            padding: 15px
+        }
+
+        .menu-item img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%
+        }
+
+        .menu-item h4 {
+            display: flex;
+            justify-content: space-between
+        }
+
+        .menu-item h4 span {
+            color: #c8a97e
+        }
+
+        /* Chef */
+        .chef {
+            padding: 100px 7%;
+            text-align: center;
+            background: #fafafa
+        }
+
+        .chef-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px
+        }
+
+        .chef-card img {
+            width: 100%;
+            border-radius: 5px
+        }
+
+        .chef-card h4 {
+            margin-top: 15px
+        }
+
+        .social i {
+            margin: 5px;
+            color: #c8a97e;
+            cursor: pointer
+        }
+
+        /* Reservation */
+        .reservation {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 600px
+        }
+
+        .res-left {
+            padding: 80px 10%;
+            background: #fff
+        }
+
+        .res-left h2 {
+            font-size: 40px;
+            margin-bottom: 30px
+        }
+
+        .row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px
+        }
+
+        .row input,
+        .row select {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd
+        }
+
+        .full {
+            width: 100%;
+            margin-top: 15px;
+            padding: 15px
+        }
+
+        .res-right {
+            background: url('https://preview.colorlib.com/theme/flavor/images/bg_3.jpg.webp') center/cover
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: #aaa;
+            padding: 80px 7% 20px
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px
+        }
+
+        footer h3,
+        footer h4 {
+            color: #fff;
+            margin-bottom: 20px
+        }
+
+        .insta-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px
+        }
+
+        .insta-grid img {
+            width: 100%
+        }
+
+        footer input {
+            width: 100%;
+            padding: 10px;
+            background: #222;
+            border: none;
+            color: #fff;
+            margin: 10px 0
+        }
+
+        .copy {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            font-size: 13px
+        }
+
+        @media(max-width:900px) {
+
+            .nav-links,
+            .btn-reserve {
+                display: none
+            }
+
+            .hamburger {
+                display: block
+            }
+
+            .about,
+            .counter,
+            .service-grid,
+            .menu-grid,
+            .chef-cards,
+            .reservation,
+            .footer-grid {
+                grid-template-columns: 1fr
+            }
+
+            .hero h1 {
+                font-size: 40px;
+                line-height: 48px
+            }
+
+            .row {
+                flex-direction: column
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="logo">Flavor<span>.</span></div>
+        <ul class="nav-links">
+            <li class="active">Home</li>
+            <li>About</li>
+            <li>Specialties</li>
+            <li>Menu</li>
+            <li>Reservation</li>
+            <li>Blog</li>
+            <li>Contact</li>
+        </ul>
+        <button class="btn-reserve">Book a table</button>
+        <i class="fa fa-bars hamburger"></i>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="sub">FLAVOR RESTAURANT</span>
+            <h1>We Love <br>Delicious Foods!</h1>
+            <div class="hero-btns">
+                <button class="btn-primary">Explore Menu</button>
+                <button class="btn-white">Book a Table</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about">
+        <div class="about-img">
+            <img src="https://preview.colorlib.com/theme/flavor/images/about.jpg.webp" alt="">
+        </div>
+        <div class="about-text">
+            <span>ABOUT</span>
+            <h2>Flavor Restaurant</h2>
+            <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have
+                been rewritten a thousand times and everything that was left from its origin would be the word "and".
+            </p>
+            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a
+                paradisematic country.</p>
+            <p class="signature">Mon - Fri <b>8 AM - 11 PM</b> <br> <b>+1-978-123-4567</b></p>
+        </div>
+    </section>
+
+    <!-- COUNTER -->
+    <section class="counter">
+        <div>
+            <h3>18</h3>
+            <p>Years of Experience</p>
+        </div>
+        <div>
+            <h3>100</h3>
+            <p>Menus/Dish</p>
+        </div>
+        <div>
+            <h3>50</h3>
+            <p>Staffs</p>
+        </div>
+        <div>
+            <h3>15,000</h3>
+            <p>Happy Customers</p>
+        </div>
+        <div>
+            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services">
+        <span>Catering Services</span>
+        <h2>Catering Services</h2>
+        <div class="service-grid">
+            <div class="s-box"><i class="fa-solid fa-cake-candles"></i>
+                <h4>Birthday Party</h4>
+                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.
+                </p>
+            </div>
+            <div class="s-box"><i class="fa-solid fa-briefcase"></i>
+                <h4>Business Meetings</h4>
+                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.
+                </p>
+            </div>
+            <div class="s-box"><i class="fa-solid fa-utensils"></i>
+                <h4>Wedding Party</h4>
+                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU -->
+    <section class="menu">
+        <span>Specialties</span>
+        <h2>Our Menu</h2>
+        <div class="menu-grid">
+            <div class="menu-item"><img src="https://preview.colorlib.com/theme/flavor/images/menu-1.jpg.webp">
+                <div>
+                    <h4>Grilled Beef with potatoes <span>$29</span></h4>
+                    <p>Meat, Potatoes, Rice, Tomatoe</p>
+                </div>
+            </div>
+            <div class="menu-item"><img src="https://preview.colorlib.com/theme/flavor/images/menu-2.jpg.webp">
+                <div>
+                    <h4>Grilled Crab with Onion <span>$29</span></h4>
+                    <p>Meat, Potatoes, Rice, Tomatoe</p>
+                </div>
+            </div>
+            <div class="menu-item"><img src="https://preview.colorlib.com/theme/flavor/images/menu-3.jpg.webp">
+                <div>
+                    <h4>Grilled Beef with potatoes <span>$29</span></h4>
+                    <p>Meat, Potatoes, Rice, Tomatoe</p>
+                </div>
+            </div>
+            <div class="menu-item"><img src="https://preview.colorlib.com/theme/flavor/images/menu-4.jpg.webp">
+                <div>
+                    <h4>Grilled Beef with potatoes <span>$29</span></h4>
+                    <p>Meat, Potatoes, Rice, Tomatoe</p>
+                </div>
+            </div>
+            <div class="menu-item"><img src="https://preview.colorlib.com/theme/flavor/images/menu-5.jpg.webp">
+                <div>
+                    <h4>Grilled Beef with potatoes <span>$29</span></h4>
+                    <p>Meat, Potatoes, Rice, Tomatoe</p>
+                </div>
+            </div>
+            <div class="menu-item"><img src="https://preview.colorlib.com/theme/flavor/images/menu-6.jpg.webp">
+                <div>
+                    <h4>Grilled Beef with potatoes <span>$29</span></h4>
+                    <p>Meat, Potatoes, Rice, Tomatoe</p>
+                </div>
+            </div>
+        </div>
+        <button class="btn-primary" style="margin-top:30px">View all menu</button>
+    </section>
+
+    <!-- CHEF -->
+    <section class="chef">
+        <div class="chef-text">
+            <span>Chef</span>
+            <h2>Our Master Chef</h2>
+            <div class="chef-cards">
+                <div class="chef-card"><img src="https://preview.colorlib.com/theme/flavor/images/chef-1.jpg.webp">
+                    <h4>John Smooth</h4>
+                    <p>Restaurant Owner</p>
+                    <div class="social"><i class="fab fa-twitter"></i><i class="fab fa-facebook"></i><i
+                            class="fab fa-instagram"></i></div>
+                </div>
+                <div class="chef-card"><img src="https://preview.colorlib.com/theme/flavor/images/chef-2.jpg.webp">
+                    <h4>Rebeca Welson</h4>
+                    <p>Head Chef</p>
+                    <div class="social"><i class="fab fa-twitter"></i><i class="fab fa-facebook"></i><i
+                            class="fab fa-instagram"></i></div>
+                </div>
+                <div class="chef-card"><img src="https://preview.colorlib.com/theme/flavor/images/chef-3.jpg.webp">
+                    <h4>Kharl Branyt</h4>
+                    <p>Chef</p>
+                    <div class="social"><i class="fab fa-twitter"></i><i class="fab fa-facebook"></i><i
+                            class="fab fa-instagram"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESERVATION -->
+    <section class="reservation">
+        <div class="res-left">
+            <span>Book a table</span>
+            <h2>Make Reservation</h2>
+            <form>
+                <div class="row"><input type="text" placeholder="Name"><input type="email" placeholder="Email"></div>
+                <div class="row"><input type="text" placeholder="Phone"><input type="date"></div>
+                <div class="row"><input type="time"><select>
+                        <option>Person</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>4+</option>
+                    </select></div>
+                <button class="btn-primary full">Make a Reservation</button>
+            </form>
+        </div>
+        <div class="res-right"></div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h3>Flavor</h3>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live
+                    the blind texts.</p>
+                <div class="social"><i class="fab fa-twitter"></i><i class="fab fa-facebook"></i><i
+                        class="fab fa-instagram"></i></div>
+            </div>
+            <div>
+                <h4>Open Hours</h4>
+                <p>Monday 9:00 - 24:00 <br> Tuesday 9:00 - 24:00 <br> Wednesday 9:00 - 24:00 <br> Thursday 9:00 - 24:00
+                    <br> Friday 9:00 - 02:00</p>
+            </div>
+            <div>
+                <h4>Instagram</h4>
+                <div class="insta-grid"><img
+                        src="https://preview.colorlib.com/theme/flavor/images/insta-1.jpg.webp"><img
+                        src="https://preview.colorlib.com/theme/flavor/images/insta-2.jpg.webp"><img
+                        src="https://preview.colorlib.com/theme/flavor/images/insta-3.jpg.webp"><img
+                        src="https://preview.colorlib.com/theme/flavor/images/insta-4.jpg.webp"><img
+                        src="https://preview.colorlib.com/theme/flavor/images/insta-5.jpg.webp"><img
+                        src="https://preview.colorlib.com/theme/flavor/images/insta-6.jpg.webp"></div>
+            </div>
+            <div>
+                <h4>Newsletter</h4>
+                <p>Far far away, behind the word mountains, far from the countries.</p><input type="text"
+                    placeholder="Enter email address"><button class="btn-primary">Subscribe</button>
+            </div>
+        </div>
+        <p class="copy">Copyright ©2026 All rights reserved | This template is made with ❤️ by Colorlib - Cloned by You
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
